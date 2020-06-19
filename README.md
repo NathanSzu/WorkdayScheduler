@@ -10,3 +10,4 @@ Time slot background colors that automatically update to display the current hou
 
 Application can be found at https://nathanszu.github.io/WorkdayScheduler/
 
+<img src="https://github.com/NathanSzu/WorkdayScheduler/blob/master/Assets/workScheduler.png>
