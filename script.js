@@ -16,15 +16,28 @@ var timeSlots = ["9", "10", "11", "12", "13", "14", "15", "16", "17"]
 
 // FUNCTIONS
 // Function to identify the current day and append it to the paragraph with id= "currentDay"
-// Function to read the current time and set background colors accordingly.
 function setPage(){
     var d = new Date();
     $("#currentDay").text(d.toDateString());
 };
 setPage();
 
-// Function to recall saved schedule data and appends it to the appropriate text areas on page load.
+// Function to read the current time and set background colors accordingly.
+var hour = moment().hour();
 
+for (let x = 0; x < txtIds.length; x++) {
+    if (hour == timeSlots[x]) {
+        $(txtIds[x]).attr("class", "present")   
+    }
+    else if (hour < timeSlots[x]) {
+        $(txtIds[x]).attr("class", "future")
+    }
+    else {
+        $(txtIds[x]).attr("class", "past")
+    }
+}
+
+// Function to recall saved schedule data and appends it to the appropriate text areas on page load.
 function loadSave(){
     var saveData = JSON.parse(localStorage.getItem("schedule")) || [];
     for (let i = 0; i < txtIds.length; i++) {
@@ -41,6 +54,7 @@ function saveNew(){
 };
 
 
+// Event listeners to save section text to local storage on click.
 $("#saveBtn9").on("click", function(){ 
     scheduleTxt[0] = $("#9AM").val();
     saveNew();
@@ -85,24 +99,3 @@ $("#saveBtn5").on("click", function(){
     scheduleTxt[8] = $("#5PM").val();
     saveNew();
 });
-
-var hour = moment().hour();
-var x = 0
-
-for (let x = 0; x < txtIds.length; x++) {
-    if (hour === timeSlots[x]) {
-        $(txtIds[x]).attr("class", "present")   
-    }
-    else if (hour < timeSlots[x]) {
-        $(txtIds[x]).attr("class", "future")
-    }
-    else {
-        $(txtIds[x]).attr("class", "past")
-    }
-}
-
-
-console.log(hour)
-console.log(timeSlots[x])
-
-console.log((moment().hour()))
